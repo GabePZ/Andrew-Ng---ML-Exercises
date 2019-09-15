@@ -47,17 +47,21 @@ error_val   = zeros(m, 1);
 %           % X(1:i, :) and y(1:i), storing the result in 
 %           % error_train(i) and error_val(i)
 %           ....
-%           
+%
 %       end
 %
 
 % ---------------------- Sample Solution ----------------------
 
+theta = trainLinearReg(X, y, lambda); # 3 x 1
 
-
-
-
-
+for i = 1:m
+  X_i = X(1:i,:);
+  y_i = y(1:i);
+  [theta_i] = trainLinearReg(X_i,y_i,lambda);
+  error_train(i) = 1/(2*i)*sum((X_i*theta_i-y_i).^2);
+  error_val(i) = 1/(2*size(Xval, 1))*sum((Xval*theta_i-yval).^2);
+end
 
 % -------------------------------------------------------------
 
